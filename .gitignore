@@ -5,6 +5,7 @@
 
 # testing
 /coverage
+/src/Movie.js
 
 # production
 /build
