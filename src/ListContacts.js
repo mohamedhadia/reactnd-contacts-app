@@ -3,6 +3,14 @@ import PropTypes from "prop-types";
 
 export default function ListContacts(props) {
   const [queryN, setqueryN] = useState("");
+
+  const showingContacts =
+    queryN === ""
+      ? props.contacts
+      : props.contacts.filter((c) =>
+          c.name.toLowerCase().includes(queryN.toLowerCase())
+        );
+
   return (
     <div className="list-contacts">
       <div className="list-contacts-top">
@@ -17,8 +25,21 @@ export default function ListContacts(props) {
         />
         {JSON.stringify(queryN)}
       </div>
+
+      {showingContacts !== props.contacts && (
+        <div className="showing-contacts">
+          Now showing {showingContacts.length} of {props.contacts.length}
+          <button
+            onClick={() => {
+              setqueryN("");
+            }}
+          >
+            show all
+          </button>
+        </div>
+      )}
       <ol className="contact-list">
-        {props.contacts.map((contact) => (
+        {showingContacts.map((contact) => (
           <li className="contact-list-item" key={contact.id}>
             <div
               className="contact-avatar"
@@ -30,7 +51,7 @@ export default function ListContacts(props) {
             </div>
             <button
               onClick={() => props.onDeleteContact(contact)}
-              classNam="contact-remove"
+              className="contact-remove"
             >
               Remove
             </button>
