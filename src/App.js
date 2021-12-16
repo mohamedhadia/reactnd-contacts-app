@@ -7,6 +7,7 @@ function App() {
   const removeContact = (contact) => {
     setcontacts((prev) => prev.filter((c) => c.id !== contact.id));
 
+    ContactsApi.remove(contact);
     // this.setState((currentState) => ({
     //   contacts: currentState.contacts.filter((c) => {
     //     return c.id !== contact.id;
@@ -18,7 +19,6 @@ function App() {
     ContactsApi.getAll().then((data) => {
       setcontacts(data);
     });
-    return () => {};
   }, []);
 
   return (
