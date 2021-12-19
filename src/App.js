@@ -1,18 +1,15 @@
 import React, { useState, useEffect } from "react";
 import ListContacts from "./ListContacts";
 import * as ContactsApi from "./utils/ContactsAPI";
+import CreateContact from "./utils/CreateContact";
+
 function App() {
   const [contacts, setcontacts] = useState([]);
+  const [status, setstatus] = useState("contacts");
 
   const removeContact = (contact) => {
     setcontacts((prev) => prev.filter((c) => c.id !== contact.id));
-
     ContactsApi.remove(contact);
-    // this.setState((currentState) => ({
-    //   contacts: currentState.contacts.filter((c) => {
-    //     return c.id !== contact.id;
-    //   }),
-    // }));
   };
 
   useEffect(() => {
@@ -23,7 +20,10 @@ function App() {
 
   return (
     <div>
-      <ListContacts onDeleteContact={removeContact} contacts={contacts} />
+      {status === "contacts" && (
+        <ListContacts onDeleteContact={removeContact} contacts={contacts} />
+      )}
+      {status === "create" && <CreateContact />}
     </div>
   );
 }
