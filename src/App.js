@@ -11,6 +11,10 @@ function App() {
     setcontacts((prev) => prev.filter((c) => c.id !== contact.id));
     ContactsApi.remove(contact);
   };
+  const addContact = (contact) => {
+    setcontacts((prev) => [...prev, contact]);
+    ContactsApi.create(contact);
+  };
 
   useEffect(() => {
     ContactsApi.getAll().then((data) => {
@@ -32,7 +36,10 @@ function App() {
           }
         />
 
-        <Route path="/create" element={<CreateContact />} />
+        <Route
+          path="/create"
+          element={<CreateContact onCreate={addContact} />}
+        />
       </Routes>
     </div>
   );
