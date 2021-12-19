@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import ListContacts from "./ListContacts";
 import * as ContactsApi from "./utils/ContactsAPI";
-import CreateContact from "./utils/CreateContact";
+import CreateContact from "./CreateContact";
 import { Route, Routes } from "react-router-dom";
 
 function App() {
