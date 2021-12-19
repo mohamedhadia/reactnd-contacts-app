@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
+import { Link } from "react-router-dom";
 
 export default function ListContacts(props) {
   const [queryN, setqueryN] = useState("");
@@ -23,9 +24,9 @@ export default function ListContacts(props) {
             setqueryN(e.target.value);
           }}
         />
-        <a href="#create" className="add-contact" onClick={props.onNavigate}>
+        <Link to="/create" className="add-contact">
           Add contact
-        </a>
+        </Link>
       </div>
 
       {showingContacts !== props.contacts && (
