@@ -21,7 +21,11 @@ function App() {
   return (
     <div>
       {status === "contacts" && (
-        <ListContacts onDeleteContact={removeContact} contacts={contacts} />
+        <ListContacts
+          onDeleteContact={removeContact}
+          contacts={contacts}
+          onNavigate={() => setstatus("create")}
+        />
       )}
       {status === "create" && <CreateContact />}
     </div>

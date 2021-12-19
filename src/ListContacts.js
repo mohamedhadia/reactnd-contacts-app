@@ -23,7 +23,9 @@ export default function ListContacts(props) {
             setqueryN(e.target.value);
           }}
         />
-        {JSON.stringify(queryN)}
+        <a href="#create" className="add-contact" onClick={props.onNavigate}>
+          Add contact
+        </a>
       </div>
 
       {showingContacts !== props.contacts && (
