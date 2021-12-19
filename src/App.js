@@ -2,10 +2,10 @@ import React, { useState, useEffect } from "react";
 import ListContacts from "./ListContacts";
 import * as ContactsApi from "./utils/ContactsAPI";
 import CreateContact from "./utils/CreateContact";
+import { Route, Routes } from "react-router-dom";
 
 function App() {
   const [contacts, setcontacts] = useState([]);
-  const [status, setstatus] = useState("contacts");
 
   const removeContact = (contact) => {
     setcontacts((prev) => prev.filter((c) => c.id !== contact.id));
@@ -20,14 +20,20 @@ function App() {
 
   return (
     <div>
-      {status === "contacts" && (
-        <ListContacts
-          onDeleteContact={removeContact}
-          contacts={contacts}
-          onNavigate={() => setstatus("create")}
+      <Routes>
+        <Route
+          path="/"
+          element={
+            <ListContacts
+              onDeleteContact={removeContact}
+              contacts={contacts}
+              // onNavigate={() => setstatus("create")}
+            />
+          }
         />
-      )}
-      {status === "create" && <CreateContact />}
+
+        <Route path="/create" element={<CreateContact />} />
+      </Routes>
     </div>
   );
 }
